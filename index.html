@@ -1,263 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Library Book Management System</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<title>Smart Library Book Management System</title>
 
-        body {
-            background: #f4f7fb;
-            color: #222;
-        }
+<style>
 
-        header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 25px 15px;
-            text-align: center;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        header h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
+body {
+    background: #f4f7fb;
+    color: #222;
+}
 
-        header p {
-            font-size: 15px;
-        }
+header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
 
-        .container {
-            width: 92%;
-            max-width: 1200px;
-            margin: 25px auto;
-        }
+header h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+header p {
+    font-size: 15px;
+}
 
-        .stat-card {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 25px auto;
+}
 
-        .stat-card h2 {
-            color: #2a5298;
-            font-size: 28px;
-        }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
 
-        .stat-card p {
-            margin-top: 5px;
-            color: #666;
-        }
+.stat-card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-        .section {
-            background: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
+.stat-card h2 {
+    color: #2a5298;
+    font-size: 28px;
+}
 
-        .section h2 {
-            color: #1e3c72;
-            margin-bottom: 18px;
-        }
+.stat-card p {
+    margin-top: 5px;
+    color: #666;
+}
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+.section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 15px;
-        }
+.section h2 {
+    color: #1e3c72;
+    margin-bottom: 18px;
+}
 
-        button {
-            border: none;
-            padding: 11px 16px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-            background: #2a5298;
-            transition: 0.3s;
-        }
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
 
-        button:hover {
-            opacity: 0.85;
-            transform: translateY(-1px);
-        }
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+}
 
-        .add-btn {
-            background: #198754;
-            margin-top: 15px;
-        }
+button {
+    border: none;
+    padding: 11px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    background: #2a5298;
+    transition: 0.3s;
+    margin: 3px;
+}
 
-        .search-btn {
-            background: #6f42c1;
-        }
+button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
 
-        .danger {
-            background: #dc3545;
-        }
+.add-btn {
+    background: #198754;
+    margin-top: 15px;
+}
 
-        .warning {
-            background: #f39c12;
-        }
+.update-btn {
+    background: #0d6efd;
+    margin-top: 15px;
+}
 
-        .success {
-            background: #198754;
-        }
+.cancel-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
 
-        .search-area {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+.search-btn {
+    background: #6f42c1;
+}
 
-        .search-area input {
-            flex: 1;
-        }
+.danger {
+    background: #dc3545;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.warning {
+    background: #f39c12;
+}
 
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
+.success {
+    background: #198754;
+}
 
-        th {
-            background: #1e3c72;
-            color: white;
-        }
+.edit {
+    background: #0d6efd;
+}
 
-        tr:hover {
-            background: #f5f8ff;
-        }
+.search-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-        .status {
-            padding: 5px 9px;
-            border-radius: 15px;
-            font-size: 13px;
-            font-weight: bold;
-        }
+.search-area input {
+    flex: 1;
+}
 
-        .available {
-            background: #d1e7dd;
-            color: #0f5132;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        .issued {
-            background: #f8d7da;
-            color: #842029;
-        }
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
 
-        .tree-box {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            overflow-x: auto;
-        }
+th {
+    background: #1e3c72;
+    color: white;
+}
 
-        .tree-node {
-            display: inline-block;
-            background: #2a5298;
-            color: white;
-            padding: 10px 15px;
-            margin: 5px;
-            border-radius: 20px;
-        }
+tr:hover {
+    background: #f5f8ff;
+}
 
-        .empty {
-            text-align: center;
-            padding: 20px;
-            color: #777;
-        }
+.status {
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #1e3c72;
-            color: white;
-            margin-top: 30px;
-        }
+.available {
+    background: #d1e7dd;
+    color: #0f5132;
+}
 
-        @media (max-width: 800px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+.issued {
+    background: #f8d7da;
+    color: #842029;
+}
 
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
+.tree-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-x: auto;
+}
 
-            table {
-                min-width: 700px;
-            }
+.tree-node {
+    display: inline-block;
+    background: #2a5298;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 20px;
+}
 
-            .section {
-                overflow-x: auto;
-            }
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
 
-            .search-area {
-                flex-direction: column;
-            }
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
 
-            header h1 {
-                font-size: 23px;
-            }
-        }
+.found {
+    background: #e9f7ef;
+    color: #155724;
+}
 
-        @media (max-width: 450px) {
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
+.not-found {
+    background: #f8d7da;
+    color: #721c24;
+}
 
-            .stat-card h2 {
-                font-size: 23px;
-            }
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e3c72;
+    color: white;
+    margin-top: 30px;
+}
 
-            .container {
-                width: 95%;
-            }
-        }
-    </style>
+#loading {
+    text-align: center;
+    padding: 15px;
+    color: #2a5298;
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        min-width: 850px;
+    }
+
+    .section {
+        overflow-x: auto;
+    }
+
+    .search-area {
+        flex-direction: column;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-card h2 {
+        font-size: 23px;
+    }
+
+    .container {
+        width: 95%;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
+
     <h1>📚 Smart Library Management System</h1>
-    <p>Using Hash Tables and Binary Search Trees</p>
+
+    <p>
+        Using Hash Tables and Binary Search Trees
+    </p>
+
 </header>
+
 
 <div class="container">
 
     <!-- Statistics -->
+
     <div class="stats">
 
         <div class="stat-card">
@@ -283,52 +333,97 @@
     </div>
 
 
-    <!-- Add Book -->
+    <!-- Add / Update Book -->
+
     <div class="section">
 
-        <h2>➕ Add New Book</h2>
+        <h2 id="formTitle">➕ Add New Book</h2>
 
         <div class="form-grid">
 
-            <input type="text" id="bookId"
-                   placeholder="Book ID">
+            <input
+                type="text"
+                id="bookId"
+                placeholder="Book ID">
 
-            <input type="text" id="bookTitle"
-                   placeholder="Book Title">
+            <input
+                type="text"
+                id="bookTitle"
+                placeholder="Book Title">
 
-            <input type="text" id="author"
-                   placeholder="Author Name">
+            <input
+                type="text"
+                id="author"
+                placeholder="Author Name">
 
-            <input type="text" id="category"
-                   placeholder="Category">
+            <input
+                type="text"
+                id="category"
+                placeholder="Category">
 
         </div>
 
-        <button class="add-btn" onclick="addBook()">
+
+        <button
+            id="addButton"
+            class="add-btn"
+            onclick="addBook()">
+
             Add Book
+
+        </button>
+
+
+        <button
+            id="updateButton"
+            class="update-btn"
+            onclick="updateBook()"
+            style="display:none;">
+
+            Update Book
+
+        </button>
+
+
+        <button
+            id="cancelButton"
+            class="cancel-btn"
+            onclick="cancelEdit()"
+            style="display:none;">
+
+            Cancel
+
         </button>
 
     </div>
 
 
     <!-- Search -->
+
     <div class="section">
 
         <h2>🔍 Search Book</h2>
 
         <div class="search-area">
 
-            <input type="text"
-                   id="searchInput"
-                   placeholder="Enter Book ID or Title">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Enter Book ID or Title">
 
-            <button class="search-btn"
-                    onclick="searchBook()">
+            <button
+                class="search-btn"
+                onclick="searchBook()">
+
                 Search
+
             </button>
 
-            <button onclick="displayBooks()">
+            <button
+                onclick="displayBooks()">
+
                 Show All
+
             </button>
 
         </div>
@@ -338,7 +433,15 @@
     </div>
 
 
+    <!-- Loading -->
+
+    <div id="loading">
+        Loading books from Firebase...
+    </div>
+
+
     <!-- Book Table -->
+
     <div class="section">
 
         <h2>📖 Library Books</h2>
@@ -348,17 +451,22 @@
             <table>
 
                 <thead>
+
                     <tr>
+
                         <th>ID</th>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Category</th>
                         <th>Status</th>
                         <th>Action</th>
+
                     </tr>
+
                 </thead>
 
                 <tbody id="bookTable">
+
                 </tbody>
 
             </table>
@@ -369,20 +477,27 @@
 
 
     <!-- Binary Search Tree -->
+
     <div class="section">
 
         <h2>🌳 Binary Search Tree</h2>
 
         <p style="margin-bottom:15px;">
+
             Books are organized according to their Book ID.
+
         </p>
 
         <div class="tree-box">
 
             <div id="treeDisplay">
+
                 <div class="empty">
+
                     No books available in the tree.
+
                 </div>
+
             </div>
 
         </div>
@@ -391,6 +506,7 @@
 
 
     <!-- Information -->
+
     <div class="section">
 
         <h2>💡 Data Structures Used</h2>
@@ -410,10 +526,15 @@
 
             <br><br>
 
-            <b>Local Storage:</b>
-            Book information is stored in the browser so
-            that data remains available after refreshing
-            the webpage.
+            <b>Firebase Firestore:</b>
+            Used as the cloud database to store book
+            information permanently.
+
+            <br><br>
+
+            <b>Update Function:</b>
+            Allows the administrator to edit book title,
+            author and category.
 
         </p>
 
@@ -435,598 +556,678 @@
 </footer>
 
 
-<script>
+<!-- =====================================================
+     FIREBASE + JAVASCRIPT
+===================================================== -->
 
-    /* ==============================
-       HASH TABLE
-       ============================== */
+<script type="module">
 
-    let hashTable =
-        JSON.parse(localStorage.getItem("libraryBooks")) || {};
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-    /* ==============================
-       BINARY SEARCH TREE
-       ============================== */
+/* =====================================================
+   FIREBASE CONFIGURATION
+===================================================== */
 
-    class Node {
+const firebaseConfig = {
 
-        constructor(book) {
+    apiKey: "AIzaSyAobMYp1qWVCUhTaKlCOiYyy4p33wIj78I",
 
-            this.book = book;
-            this.left = null;
-            this.right = null;
+    authDomain:
+        "smart-library-management-60064.firebaseapp.com",
 
-        }
+    projectId:
+        "smart-library-management-60064",
+
+    storageBucket:
+        "smart-library-management-60064.firebasestorage.app",
+
+    messagingSenderId:
+        "885517010947",
+
+    appId:
+        "1:885517010947:web:802d3273784a433337e636"
+
+};
+
+
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
+let hashTable = {};
+
+let editingDocumentId = null;
+
+
+/* =====================================================
+   BINARY SEARCH TREE
+===================================================== */
+
+class Node {
+
+    constructor(book) {
+
+        this.book = book;
+
+        this.left = null;
+
+        this.right = null;
+
+    }
+
+}
+
+
+class BinarySearchTree {
+
+    constructor() {
+
+        this.root = null;
 
     }
 
 
-    class BinarySearchTree {
+    insert(book) {
 
-        constructor() {
+        const newNode =
+            new Node(book);
 
-            this.root = null;
+        if (this.root === null) {
 
-        }
+            this.root = newNode;
 
-
-        insert(book) {
-
-            const newNode = new Node(book);
-
-            if (this.root === null) {
-
-                this.root = newNode;
-                return;
-
-            }
-
-            this.insertNode(this.root, newNode);
+            return;
 
         }
 
-
-        insertNode(node, newNode) {
-
-            if (
-                Number(newNode.book.id) <
-                Number(node.book.id)
-            ) {
-
-                if (node.left === null) {
-
-                    node.left = newNode;
-
-                } else {
-
-                    this.insertNode(
-                        node.left,
-                        newNode
-                    );
-
-                }
-
-            } else {
-
-                if (node.right === null) {
-
-                    node.right = newNode;
-
-                } else {
-
-                    this.insertNode(
-                        node.right,
-                        newNode
-                    );
-
-                }
-
-            }
-
-        }
-
-
-        inorder(node, result = []) {
-
-            if (node !== null) {
-
-                this.inorder(
-                    node.left,
-                    result
-                );
-
-                result.push(node.book);
-
-                this.inorder(
-                    node.right,
-                    result
-                );
-
-            }
-
-            return result;
-
-        }
-
-    }
-
-
-    /* ==============================
-       SAVE DATA
-       ============================== */
-
-    function saveData() {
-
-        localStorage.setItem(
-            "libraryBooks",
-            JSON.stringify(hashTable)
+        this.insertNode(
+            this.root,
+            newNode
         );
 
     }
 
 
-    /* ==============================
-       ADD BOOK
-       ============================== */
-
-    function addBook() {
-
-        const id =
-            document.getElementById("bookId")
-            .value.trim();
-
-        const title =
-            document.getElementById("bookTitle")
-            .value.trim();
-
-        const author =
-            document.getElementById("author")
-            .value.trim();
-
-        const category =
-            document.getElementById("category")
-            .value.trim();
-
-
-        if (!id || !title || !author || !category) {
-
-            alert("Please fill all fields.");
-            return;
-
-        }
-
-
-        if (hashTable[id]) {
-
-            alert("Book ID already exists.");
-            return;
-
-        }
-
-
-        hashTable[id] = {
-
-            id: id,
-            title: title,
-            author: author,
-            category: category,
-            status: "Available"
-
-        };
-
-
-        saveData();
-
-        clearForm();
-
-        displayBooks();
-
-        alert("Book added successfully!");
-
-    }
-
-
-    /* ==============================
-       CLEAR FORM
-       ============================== */
-
-    function clearForm() {
-
-        document.getElementById("bookId").value = "";
-        document.getElementById("bookTitle").value = "";
-        document.getElementById("author").value = "";
-        document.getElementById("category").value = "";
-
-    }
-
-
-    /* ==============================
-       DISPLAY BOOKS
-       ============================== */
-
-    function displayBooks() {
-
-        const table =
-            document.getElementById("bookTable");
-
-        table.innerHTML = "";
-
-
-        const books =
-            Object.values(hashTable);
-
-
-        if (books.length === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="6"
-                        class="empty">
-                        No books available.
-                    </td>
-                </tr>
-            `;
-
-            updateStatistics();
-            displayTree();
-
-            return;
-
-        }
-
-
-        books.forEach(book => {
-
-            const row =
-                document.createElement("tr");
-
-
-            const statusClass =
-                book.status === "Available"
-                ? "available"
-                : "issued";
-
-
-            row.innerHTML = `
-
-                <td>${book.id}</td>
-
-                <td>${book.title}</td>
-
-                <td>${book.author}</td>
-
-                <td>${book.category}</td>
-
-                <td>
-                    <span class="status ${statusClass}">
-                        ${book.status}
-                    </span>
-                </td>
-
-                <td>
-
-                    <button
-                        class="${
-                            book.status === "Available"
-                            ? "warning"
-                            : "success"
-                        }"
-                        onclick="toggleStatus('${book.id}')">
-
-                        ${
-                            book.status === "Available"
-                            ? "Issue"
-                            : "Return"
-                        }
-
-                    </button>
-
-                    <button
-                        class="danger"
-                        onclick="deleteBook('${book.id}')">
-
-                        Delete
-
-                    </button>
-
-                </td>
-
-            `;
-
-
-            table.appendChild(row);
-
-        });
-
-
-        updateStatistics();
-        displayTree();
-
-    }
-
-
-    /* ==============================
-       SEARCH BOOK
-       ============================== */
-
-    function searchBook() {
-
-        const search =
-            document.getElementById("searchInput")
-            .value.trim()
-            .toLowerCase();
-
-
-        const result =
-            document.getElementById("searchResult");
-
-
-        if (!search) {
-
-            result.innerHTML =
-                "<p>Please enter a Book ID or Title.</p>";
-
-            return;
-
-        }
-
-
-        let found = null;
-
-
-        /* Hash Table Search */
-
-        if (hashTable[search]) {
-
-            found = hashTable[search];
-
-        } else {
-
-            const books =
-                Object.values(hashTable);
-
-            found =
-                books.find(book =>
-                    book.title
-                    .toLowerCase()
-                    .includes(search)
-                );
-
-        }
-
-
-        if (found) {
-
-            result.innerHTML = `
-
-                <div style="
-                    padding:15px;
-                    background:#e9f7ef;
-                    border-radius:8px;
-                ">
-
-                    <b>Book Found!</b>
-
-                    <br><br>
-
-                    ID: ${found.id}
-
-                    <br>
-
-                    Title: ${found.title}
-
-                    <br>
-
-                    Author: ${found.author}
-
-                    <br>
-
-                    Category: ${found.category}
-
-                    <br>
-
-                    Status: ${found.status}
-
-                </div>
-
-            `;
-
-        } else {
-
-            result.innerHTML = `
-
-                <div style="
-                    padding:15px;
-                    background:#f8d7da;
-                    border-radius:8px;
-                ">
-
-                    ❌ Book not found.
-
-                </div>
-
-            `;
-
-        }
-
-    }
-
-
-    /* ==============================
-       ISSUE / RETURN BOOK
-       ============================== */
-
-    function toggleStatus(id) {
-
-        if (!hashTable[id]) return;
-
+    insertNode(node, newNode) {
 
         if (
-            hashTable[id].status === "Available"
+            Number(newNode.book.id) <
+            Number(node.book.id)
         ) {
 
-            hashTable[id].status = "Issued";
+            if (node.left === null) {
+
+                node.left = newNode;
+
+            } else {
+
+                this.insertNode(
+                    node.left,
+                    newNode
+                );
+
+            }
 
         } else {
 
-            hashTable[id].status = "Available";
+            if (node.right === null) {
 
-        }
+                node.right = newNode;
 
+            } else {
 
-        saveData();
+                this.insertNode(
+                    node.right,
+                    newNode
+                );
 
-        displayBooks();
-
-    }
-
-
-    /* ==============================
-       DELETE BOOK
-       ============================== */
-
-    function deleteBook(id) {
-
-        if (!confirm(
-            "Are you sure you want to delete this book?"
-        )) {
-
-            return;
-
-        }
-
-
-        delete hashTable[id];
-
-        saveData();
-
-        displayBooks();
-
-    }
-
-
-    /* ==============================
-       DISPLAY BST
-       ============================== */
-
-    function displayTree() {
-
-        const treeDisplay =
-            document.getElementById("treeDisplay");
-
-
-        const tree =
-            new BinarySearchTree();
-
-
-        Object.values(hashTable)
-            .forEach(book => {
-
-                tree.insert(book);
-
-            });
-
-
-        const sortedBooks =
-            tree.inorder(tree.root);
-
-
-        if (sortedBooks.length === 0) {
-
-            treeDisplay.innerHTML = `
-                <div class="empty">
-                    No books available in the tree.
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        treeDisplay.innerHTML = `
-
-            <p style="margin-bottom:15px;">
-                Inorder Traversal:
-            </p>
-
-            ${
-                sortedBooks
-                .map(book => `
-                    <span class="tree-node">
-                        ${book.id} - ${book.title}
-                    </span>
-                `)
-                .join("")
             }
 
-        `;
+        }
 
     }
 
 
-    /* ==============================
-       STATISTICS
-       ============================== */
+    inorder(node, result = []) {
 
-    function updateStatistics() {
+        if (node !== null) {
 
-        const books =
-            Object.values(hashTable);
+            this.inorder(
+                node.left,
+                result
+            );
+
+            result.push(node.book);
+
+            this.inorder(
+                node.right,
+                result
+            );
+
+        }
+
+        return result;
+
+    }
+
+}
 
 
-        const total =
-            books.length;
+/* =====================================================
+   LOAD BOOKS FROM FIREBASE
+===================================================== */
 
+async function loadBooks() {
 
-        const available =
-            books.filter(
-                book => book.status === "Available"
-            ).length;
+    try {
 
+        document.getElementById("loading")
+            .style.display = "block";
 
-        const issued =
-            books.filter(
-                book => book.status === "Issued"
-            ).length;
-
-
-        const categorySet =
-            new Set(
-                books.map(book => book.category)
+        const querySnapshot =
+            await getDocs(
+                collection(db, "books")
             );
 
 
-        document.getElementById(
-            "totalBooks"
-        ).textContent = total;
+        hashTable = {};
 
 
-        document.getElementById(
-            "availableBooks"
-        ).textContent = available;
+        querySnapshot.forEach(
+            (documentSnapshot) => {
+
+                const book =
+                    documentSnapshot.data();
+
+                book.documentId =
+                    documentSnapshot.id;
+
+                hashTable[book.id] =
+                    book;
+
+            }
+        );
 
 
-        document.getElementById(
-            "issuedBooks"
-        ).textContent = issued;
+        displayBooks();
+
+        document.getElementById("loading")
+            .style.display = "none";
 
 
-        document.getElementById(
-            "categories"
-        ).textContent = categorySet.size;
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("loading")
+            .innerHTML =
+            "❌ Firebase connection error: "
+            + error.message;
+
+    }
+
+}
+
+
+/* =====================================================
+   ADD BOOK
+===================================================== */
+
+async function addBook() {
+
+    const id =
+        document.getElementById("bookId")
+        .value.trim();
+
+    const title =
+        document.getElementById("bookTitle")
+        .value.trim();
+
+    const author =
+        document.getElementById("author")
+        .value.trim();
+
+    const category =
+        document.getElementById("category")
+        .value.trim();
+
+
+    if (
+        !id ||
+        !title ||
+        !author ||
+        !category
+    ) {
+
+        alert("Please fill all fields.");
+
+        return;
 
     }
 
 
-    /* ==============================
-       INITIAL LOAD
-       ============================== */
+    if (hashTable[id]) {
 
-    displayBooks();
+        alert("Book ID already exists.");
 
-</script>
+        return;
 
-</body>
-</html>
+    }
+
+
+    try {
+
+        await addDoc(
+            collection(db, "books"),
+            {
+
+                id: id,
+
+                title: title,
+
+                author: author,
+
+                category: category,
+
+                status: "Available"
+
+            }
+        );
+
+
+        alert(
+            "Book added successfully to Firebase!"
+        );
+
+
+        clearForm();
+
+        await loadBooks();
+
+
+    } catch (error) {
+
+        alert(
+            "Error adding book: "
+            + error.message
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE BOOK
+===================================================== */
+
+async function updateBook() {
+
+    if (!editingDocumentId) {
+
+        alert("No book selected for update.");
+
+        return;
+
+    }
+
+
+    const title =
+        document.getElementById("bookTitle")
+        .value.trim();
+
+    const author =
+        document.getElementById("author")
+        .value.trim();
+
+    const category =
+        document.getElementById("category")
+        .value.trim();
+
+
+    if (
+        !title ||
+        !author ||
+        !category
+    ) {
+
+        alert(
+            "Please fill all fields."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const bookRef =
+            doc(
+                db,
+                "books",
+                editingDocumentId
+            );
+
+
+        await updateDoc(
+            bookRef,
+            {
+
+                title: title,
+
+                author: author,
+
+                category: category
+
+            }
+        );
+
+
+        alert(
+            "Book updated successfully!"
+        );
+
+
+        cancelEdit();
+
+        await loadBooks();
+
+
+    } catch (error) {
+
+        alert(
+            "Error updating book: "
+            + error.message
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   EDIT BOOK
+===================================================== */
+
+window.editBook = function(
+    documentId,
+    id,
+    title,
+    author,
+    category
+) {
+
+    editingDocumentId =
+        documentId;
+
+
+    document.getElementById("bookId")
+        .value = id;
+
+
+    document.getElementById("bookTitle")
+        .value = title;
+
+
+    document.getElementById("author")
+        .value = author;
+
+
+    document.getElementById("category")
+        .value = category;
+
+
+    document.getElementById("bookId")
+        .disabled = true;
+
+
+    document.getElementById("formTitle")
+        .textContent =
+        "✏️ Update Book";
+
+
+    document.getElementById("addButton")
+        .style.display = "none";
+
+
+    document.getElementById("updateButton")
+        .style.display = "inline-block";
+
+
+    document.getElementById("cancelButton")
+        .style.display = "inline-block";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+};
+
+
+/* =====================================================
+   CANCEL EDIT
+===================================================== */
+
+window.cancelEdit = function() {
+
+    editingDocumentId = null;
+
+
+    clearForm();
+
+
+    document.getElementById("bookId")
+        .disabled = false;
+
+
+    document.getElementById("formTitle")
+        .textContent =
+        "➕ Add New Book";
+
+
+    document.getElementById("addButton")
+        .style.display = "inline-block";
+
+
+    document.getElementById("updateButton")
+        .style.display = "none";
+
+
+    document.getElementById("cancelButton")
+        .style.display = "none";
+
+};
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm() {
+
+    document.getElementById("bookId")
+        .value = "";
+
+    document.getElementById("bookTitle")
+        .value = "";
+
+    document.getElementById("author")
+        .value = "";
+
+    document.getElementById("category")
+        .value = "";
+
+}
+
+
+/* =====================================================
+   DISPLAY BOOKS
+===================================================== */
+
+function displayBooks() {
+
+    const table =
+        document.getElementById("bookTable");
+
+
+    table.innerHTML = "";
+
+
+    const books =
+        Object.values(hashTable);
+
+
+    if (books.length === 0) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="empty">
+
+                    No books available.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        updateStatistics();
+
+        displayTree();
+
+        return;
+
+    }
+
+
+    books.forEach(book => {
+
+        const row =
+            document.createElement("tr");
+
+
+        const statusClass =
+            book.status === "Available"
+            ? "available"
+            : "issued";
+
+
+        row.innerHTML = `
+
+            <td>
+                ${escapeHTML(book.id)}
+            </td>
+
+            <td>
+                ${escapeHTML(book.title)}
+            </td>
+
+            <td>
+                ${escapeHTML(book.author)}
+            </td>
+
+            <td>
+                ${escapeHTML(book.category)}
+            </td>
+
+            <td>
+
+                <span
+                    class="status ${statusClass}">
+
+                    ${book.status}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button
+                    class="${
+                        book.status === "Available"
+                        ? "warning"
+                        : "success"
+                    }"
+                    onclick="toggleStatus(
+                        '${book.documentId}',
+                        '${book.status}'
+                    )">
+
+                    ${
+                        book.status === "Available"
+                        ? "Issue"
+                        : "Return"
+                    }
+
+                </button>
+
+
+                <button
+                    class="edit"
+                    onclick="editBook(
+                        '${book.documentId}',
+                        '${escapeJS(book.id)}',
+                        '${escapeJS(book.title)}',
+                        '${escapeJS(book.author)}',
+                        '${escapeJS(book.category)}'
+                    )">
+
+                    Edit
+
+                </button>
+
+
+                <button
+                    class="danger"
+                    onclick="deleteBook(
+                        '${book.documentId}'
+                    )">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        table.appendChil
