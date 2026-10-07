@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 <title>Smart Library Management System</title>
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -19,10 +21,12 @@ body {
     color: #222;
 }
 
+/* HEADER */
+
 header {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: white;
-    padding: 28px 15px;
+    padding: 30px 15px;
     text-align: center;
 }
 
@@ -32,8 +36,16 @@ header h1 {
 }
 
 header p {
+    margin-top: 5px;
     font-size: 15px;
 }
+
+#connection {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* CONTAINER */
 
 .container {
     width: 92%;
@@ -41,11 +53,16 @@ header p {
     margin: 25px auto;
 }
 
+/* MESSAGE */
+
 .status {
     text-align: center;
     margin-bottom: 15px;
     font-weight: bold;
+    min-height: 20px;
 }
+
+/* STATISTICS */
 
 .stats {
     display: grid;
@@ -72,6 +89,8 @@ header p {
     color: #555;
 }
 
+/* CARDS */
+
 .card {
     background: white;
     padding: 25px;
@@ -85,19 +104,30 @@ header p {
     margin-bottom: 18px;
 }
 
+/* FORM */
+
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 13px;
     border: 1px solid #ccc;
     border-radius: 7px;
     font-size: 15px;
+    outline: none;
 }
+
+input:focus,
+select:focus {
+    border-color: #1e3c72;
+}
+
+/* BUTTONS */
 
 button {
     padding: 12px 18px;
@@ -105,6 +135,10 @@ button {
     border-radius: 7px;
     cursor: pointer;
     font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.9;
 }
 
 .add-btn {
@@ -129,16 +163,32 @@ button {
     margin-top: 15px;
 }
 
-.search {
+.refresh-btn {
+    background: #6f42c1;
+    color: white;
     margin-bottom: 15px;
+}
+
+/* SEARCH */
+
+.search {
+    margin-bottom: 10px;
+}
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 700px;
 }
 
-th, td {
+th,
+td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
     text-align: left;
@@ -149,11 +199,37 @@ th {
     color: white;
 }
 
+tr:hover {
+    background: #f5f7fa;
+}
+
 .action-buttons {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
 }
+
+/* STATUS BADGE */
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.available {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.issued {
+    background: #f8d7da;
+    color: #842029;
+}
+
+/* EMPTY */
 
 .empty {
     text-align: center;
@@ -161,7 +237,24 @@ th {
     color: #777;
 }
 
+/* DATA STRUCTURE */
+
+.structure-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-left: 5px solid #1e3c72;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+.structure-box b {
+    color: #1e3c72;
+}
+
+/* MOBILE */
+
 @media(max-width: 700px) {
+
     .stats {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -170,154 +263,275 @@ th {
         grid-template-columns: 1fr;
     }
 
-    table {
-        font-size: 13px;
+    header h1 {
+        font-size: 24px;
     }
 
-    th, td {
-        padding: 8px;
+    .card {
+        padding: 18px;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- HEADER -->
+
 <header>
+
     <h1>📚 Smart Library Management System</h1>
-    <p>Using Hash Tables and Binary Search Trees</p>
-    <p id="connection">Connecting to Firebase...</p>
+
+    <p>
+        Using Hash Tables and Binary Search Trees
+    </p>
+
+    <p id="connection">
+        🔄 Connecting to Firebase...
+    </p>
+
 </header>
+
 
 <div class="container">
 
-    <div id="message" class="status"></div>
 
-    <!-- Statistics -->
-    <div class="stats">
+<!-- MESSAGE -->
 
-        <div class="stat-card">
-            <h2 id="totalBooks">0</h2>
-            <p>Total Books</p>
-        </div>
+<div id="message" class="status"></div>
 
-        <div class="stat-card">
-            <h2 id="availableBooks">0</h2>
-            <p>Available</p>
-        </div>
 
-        <div class="stat-card">
-            <h2 id="issuedBooks">0</h2>
-            <p>Issued</p>
-        </div>
+<!-- STATISTICS -->
 
-        <div class="stat-card">
-            <h2 id="categories">0</h2>
-            <p>Categories</p>
-        </div>
+<div class="stats">
+
+    <div class="stat-card">
+
+        <h2 id="totalBooks">0</h2>
+
+        <p>Total Books</p>
 
     </div>
 
-    <!-- Add Book -->
-    <div class="card">
 
-        <h2>➕ Add New Book</h2>
+    <div class="stat-card">
 
-        <div class="form-grid">
+        <h2 id="availableBooks">0</h2>
 
-            <input id="bookId"
-                   type="text"
-                   placeholder="Book ID">
-
-            <input id="bookTitle"
-                   type="text"
-                   placeholder="Book Title">
-
-            <input id="author"
-                   type="text"
-                   placeholder="Author Name">
-
-            <input id="category"
-                   type="text"
-                   placeholder="Category">
-
-            <select id="bookStatus">
-                <option value="Available">Available</option>
-                <option value="Issued">Issued</option>
-            </select>
-
-        </div>
-
-        <button class="add-btn" onclick="addBook()">
-            Add Book
-        </button>
-
-        <button class="clear-btn" onclick="clearForm()">
-            Clear
-        </button>
+        <p>Available</p>
 
     </div>
 
-    <!-- Search -->
-    <div class="card">
 
-        <h2>🔎 Search Books</h2>
+    <div class="stat-card">
+
+        <h2 id="issuedBooks">0</h2>
+
+        <p>Issued</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h2 id="categories">0</h2>
+
+        <p>Categories</p>
+
+    </div>
+
+</div>
+
+
+<!-- ADD / UPDATE BOOK -->
+
+<div class="card">
+
+    <h2>➕ Add / Update Book</h2>
+
+
+    <div class="form-grid">
 
         <input
-            class="search"
-            id="searchBox"
+            id="bookId"
             type="text"
-            placeholder="Search by ID, title, author or category..."
-            oninput="searchBooks()"
+            placeholder="Book ID e.g. 101"
         >
 
+
+        <input
+            id="bookTitle"
+            type="text"
+            placeholder="Book Title"
+        >
+
+
+        <input
+            id="author"
+            type="text"
+            placeholder="Author Name"
+        >
+
+
+        <input
+            id="category"
+            type="text"
+            placeholder="Category"
+        >
+
+
+        <select id="bookStatus">
+
+            <option value="Available">
+                Available
+            </option>
+
+            <option value="Issued">
+                Issued
+            </option>
+
+        </select>
+
     </div>
 
-    <!-- Books -->
-    <div class="card">
 
-        <h2>📖 Book Collection</h2>
+    <button
+        id="mainButton"
+        class="add-btn"
+        onclick="addBook()"
+    >
+        ➕ Add Book
+    </button>
 
-        <div style="overflow-x:auto;">
 
-            <table>
+    <button
+        class="clear-btn"
+        onclick="clearForm()"
+    >
+        Clear
+    </button>
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+</div>
 
-                <tbody id="bookTable">
-                </tbody>
 
-            </table>
+<!-- SEARCH -->
 
-        </div>
+<div class="card">
+
+    <h2>🔎 Search Books</h2>
+
+    <input
+        class="search"
+        id="searchBox"
+        type="text"
+        placeholder="Search by ID, title, author or category..."
+        oninput="searchBooks()"
+    >
+
+</div>
+
+
+<!-- BOOK COLLECTION -->
+
+<div class="card">
+
+    <h2>📖 Book Collection</h2>
+
+
+    <button
+        class="refresh-btn"
+        onclick="loadBooks()"
+    >
+        🔄 Refresh Books
+    </button>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Title</th>
+
+                    <th>Author</th>
+
+                    <th>Category</th>
+
+                    <th>Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="bookTable">
+
+            </tbody>
+
+        </table>
 
     </div>
 
-    <!-- Data Structure Information -->
-    <div class="card">
+</div>
 
-        <h2>🧠 Data Structures Used</h2>
+
+<!-- DATA STRUCTURES -->
+
+<div class="card">
+
+    <h2>🧠 Data Structures Used</h2>
+
+
+    <div class="structure-box">
 
         <p>
+
             <b>Hash Table:</b>
-            Book IDs are stored in a JavaScript Map for fast lookup.
+
+            JavaScript Map is used to store books using
+            Book ID as the key. It provides fast lookup
+            and duplicate ID checking.
+
         </p>
 
-        <br>
+    </div>
+
+
+    <div class="structure-box">
 
         <p>
+
             <b>Binary Search Tree:</b>
-            Books are inserted into a BST using Book ID for
-            efficient searching and ordered traversal.
+
+            Books are inserted into a Binary Search Tree
+            according to their Book ID. This demonstrates
+            efficient searching and ordered data storage.
+
+        </p>
+
+    </div>
+
+
+    <div class="structure-box">
+
+        <p>
+
+            <b>Firebase Firestore:</b>
+
+            Cloud database used to permanently store,
+            retrieve, update and delete book information.
+
         </p>
 
     </div>
@@ -325,173 +539,336 @@ th {
 </div>
 
 
-<!-- Firebase -->
+</div>
+
+
+<!-- FIREBASE -->
+
 <script type="module">
 
-import { initializeApp }
+
+/* =========================================
+   FIREBASE IMPORTS
+========================================= */
+
+import {
+    initializeApp
+}
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
     getFirestore,
     collection,
-    addDoc,
     getDocs,
+    setDoc,
     updateDoc,
     deleteDoc,
-    doc
+    doc,
+    onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================
+/* =========================================
    FIREBASE CONFIGURATION
-   ========================= */
+========================================= */
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyAobMYp1qWVCUhTaKlCOiYyy4p33wIj78I",
+    apiKey:
+        "AIzaSyAobMYp1qWVCUhTaKlCOiYyy4p33wIj78I",
 
     authDomain:
-    "smart-library-management-60064.firebaseapp.com",
+        "smart-library-management-60064.firebaseapp.com",
 
     projectId:
-    "smart-library-management-60064",
+        "smart-library-management-60064",
 
     storageBucket:
-    "smart-library-management-60064.firebasestorage.app",
+        "smart-library-management-60064.firebasestorage.app",
 
     messagingSenderId:
-    "885517010947",
+        "885517010947",
 
     appId:
-    "1:885517010947:web:802d3273784a433337e636"
+        "1:885517010947:web:802d3273784a433337e636"
+
 };
 
 
-/* =========================
-   FIREBASE INITIALIZATION
-   ========================= */
+/* =========================================
+   INITIALIZE FIREBASE
+========================================= */
 
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-const booksCollection = collection(db, "books");
+const booksCollection =
+    collection(db, "books");
 
 
-/* =========================
-   DATA STRUCTURES
-   ========================= */
+/* =========================================
+   HASH TABLE
+========================================= */
 
-// Hash Table
 const bookHashTable = new Map();
 
 
-// Binary Search Tree
+/* =========================================
+   BINARY SEARCH TREE
+========================================= */
+
 class TreeNode {
 
     constructor(book) {
+
         this.book = book;
+
         this.left = null;
+
         this.right = null;
+
     }
+
 }
 
 
 class BinarySearchTree {
 
     constructor() {
+
         this.root = null;
+
     }
+
 
     insert(book) {
 
-        const node = new TreeNode(book);
+        const node =
+            new TreeNode(book);
+
 
         if (!this.root) {
+
             this.root = node;
+
             return;
+
         }
 
-        let current = this.root;
+
+        let current =
+            this.root;
+
 
         while (true) {
 
-            if (
-                String(book.id).toLowerCase() <
-                String(current.book.id).toLowerCase()
-            ) {
+            const currentId =
+                String(current.book.id)
+                .toLowerCase();
+
+
+            const newId =
+                String(book.id)
+                .toLowerCase();
+
+
+            if (newId < currentId) {
 
                 if (!current.left) {
+
                     current.left = node;
+
                     return;
+
                 }
 
-                current = current.left;
+                current =
+                    current.left;
 
-            } else {
+            }
+
+            else {
 
                 if (!current.right) {
+
                     current.right = node;
+
                     return;
+
                 }
 
-                current = current.right;
+                current =
+                    current.right;
+
             }
+
         }
+
     }
+
+
+    /* BST SEARCH */
+
+    search(id) {
+
+        let current =
+            this.root;
+
+
+        const searchId =
+            String(id).toLowerCase();
+
+
+        while (current) {
+
+            const currentId =
+                String(current.book.id)
+                .toLowerCase();
+
+
+            if (searchId === currentId) {
+
+                return current.book;
+
+            }
+
+
+            if (searchId < currentId) {
+
+                current =
+                    current.left;
+
+            }
+
+            else {
+
+                current =
+                    current.right;
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
 }
 
 
-let bst = new BinarySearchTree();
+/* =========================================
+   GLOBAL DATA
+========================================= */
+
+let bst =
+    new BinarySearchTree();
+
 
 let allBooks = [];
 
 
-/* =========================
+let editingFirestoreId = null;
+
+
+/* =========================================
    LOAD BOOKS
-   ========================= */
+========================================= */
 
 async function loadBooks() {
 
     try {
 
-        const snapshot = await getDocs(booksCollection);
+        showMessage(
+            "Loading books...",
+            "#1e3c72"
+        );
+
+
+        const snapshot =
+            await getDocs(booksCollection);
+
 
         allBooks = [];
 
         bookHashTable.clear();
 
-        bst = new BinarySearchTree();
+        bst =
+            new BinarySearchTree();
 
 
-        snapshot.forEach((document) => {
+        snapshot.forEach(
+            (document) => {
 
-            const book = {
-                firestoreId: document.id,
-                ...document.data()
-            };
+                const data =
+                    document.data();
 
-            allBooks.push(book);
 
-            // Hash Table
-            bookHashTable.set(String(book.id), book);
+                const book = {
 
-            // BST
-            bst.insert(book);
+                    firestoreId:
+                        document.id,
 
-        });
+                    id:
+                        data.id || document.id,
+
+                    title:
+                        data.title || "",
+
+                    author:
+                        data.author || "",
+
+                    category:
+                        data.category || "",
+
+                    status:
+                        data.status || "Available"
+
+                };
+
+
+                allBooks.push(book);
+
+
+                /* HASH TABLE */
+
+                bookHashTable.set(
+                    String(book.id),
+                    book
+                );
+
+
+                /* BST */
+
+                bst.insert(book);
+
+            }
+        );
 
 
         displayBooks(allBooks);
 
         updateStatistics();
 
-        document.getElementById("connection").textContent =
+
+        document.getElementById(
+            "connection"
+        ).textContent =
             "🟢 Connected to Firebase";
 
-        document.getElementById("connection").style.color =
+
+        document.getElementById(
+            "connection"
+        ).style.color =
             "#90ee90";
+
+
+        document.getElementById(
+            "message"
+        ).textContent = "";
 
     }
 
@@ -499,154 +876,381 @@ async function loadBooks() {
 
         console.error(error);
 
-        document.getElementById("connection").textContent =
+
+        document.getElementById(
+            "connection"
+        ).textContent =
             "🔴 Firebase connection error";
 
+
+        document.getElementById(
+            "connection"
+        ).style.color =
+            "#ffdddd";
+
+
         showMessage(
-            "Firebase error: " + error.message,
+            "Firebase Error: " +
+            error.message,
             "red"
         );
+
     }
+
 }
 
 
-/* =========================
+/* =========================================
+   REAL-TIME FIREBASE LISTENER
+========================================= */
+
+function startRealtimeListener() {
+
+    onSnapshot(
+
+        booksCollection,
+
+        (snapshot) => {
+
+            allBooks = [];
+
+            bookHashTable.clear();
+
+            bst =
+                new BinarySearchTree();
+
+
+            snapshot.forEach(
+                (document) => {
+
+                    const data =
+                        document.data();
+
+
+                    const book = {
+
+                        firestoreId:
+                            document.id,
+
+                        id:
+                            data.id || document.id,
+
+                        title:
+                            data.title || "",
+
+                        author:
+                            data.author || "",
+
+                        category:
+                            data.category || "",
+
+                        status:
+                            data.status ||
+                            "Available"
+
+                    };
+
+
+                    allBooks.push(book);
+
+
+                    bookHashTable.set(
+                        String(book.id),
+                        book
+                    );
+
+
+                    bst.insert(book);
+
+                }
+            );
+
+
+            displayBooks(allBooks);
+
+            updateStatistics();
+
+
+            document.getElementById(
+                "connection"
+            ).textContent =
+                "🟢 Connected • Live Database";
+
+        },
+
+        (error) => {
+
+            console.error(error);
+
+            showMessage(
+                "Realtime database error: " +
+                error.message,
+                "red"
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================
    DISPLAY BOOKS
-   ========================= */
+========================================= */
 
 function displayBooks(books) {
 
     const table =
-        document.getElementById("bookTable");
+        document.getElementById(
+            "bookTable"
+        );
+
 
     table.innerHTML = "";
 
 
     if (books.length === 0) {
 
-        table.innerHTML =
-        `<tr>
-            <td colspan="6" class="empty">
-                No books found
-            </td>
-        </tr>`;
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+
+                    📚 No books found
+
+                </td>
+
+            </tr>
+
+        `;
 
         return;
+
     }
 
 
-    books.forEach(book => {
+    books.forEach(
+        (book) => {
 
-        const row =
-        document.createElement("tr");
+            const row =
+                document.createElement("tr");
 
 
-        row.innerHTML = `
+            const statusClass =
+                book.status === "Available"
+                ? "available"
+                : "issued";
 
-            <td>${escapeHTML(book.id || "")}</td>
 
-            <td>${escapeHTML(book.title || "")}</td>
+            row.innerHTML = `
 
-            <td>${escapeHTML(book.author || "")}</td>
+                <td>
+                    ${escapeHTML(book.id)}
+                </td>
 
-            <td>${escapeHTML(book.category || "")}</td>
 
-            <td>${escapeHTML(book.status || "Available")}</td>
+                <td>
+                    ${escapeHTML(book.title)}
+                </td>
 
-            <td>
 
-                <div class="action-buttons">
+                <td>
+                    ${escapeHTML(book.author)}
+                </td>
 
-                    <button
-                        class="update-btn"
-                        onclick="editBook('${book.firestoreId}')">
-                        Edit
-                    </button>
 
-                    <button
-                        class="delete-btn"
-                        onclick="deleteBook('${book.firestoreId}')">
-                        Delete
-                    </button>
+                <td>
+                    ${escapeHTML(book.category)}
+                </td>
 
-                </div>
 
-            </td>
-        `;
+                <td>
 
-        table.appendChild(row);
+                    <span
+                        class="badge ${statusClass}"
+                    >
 
-    });
+                        ${escapeHTML(
+                            book.status
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <div
+                        class="action-buttons"
+                    >
+
+                        <button
+                            class="update-btn"
+                            onclick="editBook('${escapeHTML(book.firestoreId)}')"
+                        >
+
+                            ✏️ Edit
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteBook('${escapeHTML(book.firestoreId)}')"
+                        >
+
+                            🗑️ Delete
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
 }
 
 
-/* =========================
+/* =========================================
    ADD BOOK
-   ========================= */
+========================================= */
 
-window.addBook = async function() {
+window.addBook =
+async function() {
+
 
     const id =
-        document.getElementById("bookId").value.trim();
+        document.getElementById(
+            "bookId"
+        ).value.trim();
+
 
     const title =
-        document.getElementById("bookTitle").value.trim();
+        document.getElementById(
+            "bookTitle"
+        ).value.trim();
+
 
     const author =
-        document.getElementById("author").value.trim();
+        document.getElementById(
+            "author"
+        ).value.trim();
+
 
     const category =
-        document.getElementById("category").value.trim();
+        document.getElementById(
+            "category"
+        ).value.trim();
+
 
     const status =
-        document.getElementById("bookStatus").value;
+        document.getElementById(
+            "bookStatus"
+        ).value;
 
 
-    if (!id || !title || !author || !category) {
+    /* VALIDATION */
+
+    if (
+        !id ||
+        !title ||
+        !author ||
+        !category
+    ) {
 
         showMessage(
-            "Please fill all fields.",
+            "⚠️ Please fill all fields.",
             "red"
         );
 
         return;
+
     }
 
 
-    // Hash Table duplicate check
-    if (bookHashTable.has(id)) {
+    /* HASH TABLE DUPLICATE CHECK */
+
+    if (
+        bookHashTable.has(id)
+    ) {
 
         showMessage(
-            "Book ID already exists.",
+            "❌ Book ID already exists.",
             "red"
         );
 
         return;
+
     }
 
 
     try {
 
-        await addDoc(booksCollection, {
 
-            id: id,
-            title: title,
-            author: author,
-            category: category,
-            status: status
+        /*
+           IMPORTANT:
 
-        });
+           Book ID is used as Firestore
+           document ID.
+
+           Example:
+
+           books
+              |
+              ├── 101
+              ├── 102
+              ├── 103
+              └── 104
+        */
+
+
+        const bookReference =
+            doc(
+                db,
+                "books",
+                id
+            );
+
+
+        await setDoc(
+            bookReference,
+            {
+
+                id: id,
+
+                title: title,
+
+                author: author,
+
+                category: category,
+
+                status: status
+
+            }
+        );
 
 
         showMessage(
-            "Book added successfully! ✅",
+            "✅ Book added successfully!",
             "green"
         );
 
 
         clearForm();
 
-        await loadBooks();
 
     }
 
@@ -654,354 +1258,96 @@ window.addBook = async function() {
 
         console.error(error);
 
+
         showMessage(
-            "Error adding book: " + error.message,
+            "❌ Error adding book: " +
+            error.message,
             "red"
         );
+
     }
+
 };
 
 
-/* =========================
+/* =========================================
    EDIT BOOK
-   ========================= */
+========================================= */
 
-window.editBook = function(firestoreId) {
+window.editBook =
+function(firestoreId) {
+
 
     const book =
         allBooks.find(
-            b => b.firestoreId === firestoreId
+            item =>
+                item.firestoreId ===
+                firestoreId
         );
 
-    if (!book) return;
+
+    if (!book) {
+
+        showMessage(
+            "Book not found.",
+            "red"
+        );
+
+        return;
+
+    }
 
 
-    document.getElementById("bookId").value =
-        book.id || "";
-
-    document.getElementById("bookTitle").value =
-        book.title || "";
-
-    document.getElementById("author").value =
-        book.author || "";
-
-    document.getElementById("category").value =
-        book.category || "";
-
-    document.getElementById("bookStatus").value =
-        book.status || "Available";
+    document.getElementById(
+        "bookId"
+    ).value =
+        book.id;
 
 
-    const addButton =
-        document.querySelector(".add-btn");
+    document.getElementById(
+        "bookTitle"
+    ).value =
+        book.title;
 
-    addButton.textContent =
-        "Update Book";
 
-    addButton.onclick =
-        function() {
-            updateBook(firestoreId);
-        };
+    document.getElementById(
+        "author"
+    ).value =
+        book.author;
+
+
+    document.getElementById(
+        "category"
+    ).value =
+        book.category;
+
+
+    document.getElementById(
+        "bookStatus"
+    ).value =
+        book.status;
+
+
+    editingFirestoreId =
+        firestoreId;
+
+
+    const button =
+        document.getElementById(
+            "mainButton"
+        );
+
+
+    button.textContent =
+        "💾 Update Book";
+
+
+    button.onclick =
+        updateBook;
 
 
     window.scrollTo({
+
         top: 0,
-        behavior: "smooth"
-    });
 
-};
-
-
-/* =========================
-   UPDATE BOOK
-   ========================= */
-
-async function updateBook(firestoreId) {
-
-    const id =
-        document.getElementById("bookId").value.trim();
-
-    const title =
-        document.getElementById("bookTitle").value.trim();
-
-    const author =
-        document.getElementById("author").value.trim();
-
-    const category =
-        document.getElementById("category").value.trim();
-
-    const status =
-        document.getElementById("bookStatus").value;
-
-
-    if (!id || !title || !author || !category) {
-
-        showMessage(
-            "Please fill all fields.",
-            "red"
-        );
-
-        return;
-    }
-
-
-    try {
-
-        const bookRef =
-            doc(db, "books", firestoreId);
-
-
-        await updateDoc(bookRef, {
-
-            id: id,
-            title: title,
-            author: author,
-            category: category,
-            status: status
-
-        });
-
-
-        showMessage(
-            "Book updated successfully! ✅",
-            "green"
-        );
-
-
-        clearForm();
-
-        await loadBooks();
-
-    }
-
-    catch(error) {
-
-        console.error(error);
-
-        showMessage(
-            "Error updating book: " + error.message,
-            "red"
-        );
-    }
-}
-
-
-/* =========================
-   DELETE BOOK
-   ========================= */
-
-window.deleteBook = async function(firestoreId) {
-
-    const confirmDelete =
-        confirm("Delete this book?");
-
-
-    if (!confirmDelete) return;
-
-
-    try {
-
-        await deleteDoc(
-            doc(db, "books", firestoreId)
-        );
-
-
-        showMessage(
-            "Book deleted successfully! 🗑️",
-            "green"
-        );
-
-
-        await loadBooks();
-
-    }
-
-    catch(error) {
-
-        console.error(error);
-
-        showMessage(
-            "Error deleting book: " + error.message,
-            "red"
-        );
-    }
-};
-
-
-/* =========================
-   SEARCH
-   ========================= */
-
-window.searchBooks = function() {
-
-    const search =
-        document.getElementById("searchBox")
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    if (!search) {
-
-        displayBooks(allBooks);
-
-        return;
-    }
-
-
-    const results =
-        allBooks.filter(book =>
-
-            String(book.id || "")
-                .toLowerCase()
-                .includes(search)
-
-            ||
-
-            String(book.title || "")
-                .toLowerCase()
-                .includes(search)
-
-            ||
-
-            String(book.author || "")
-                .toLowerCase()
-                .includes(search)
-
-            ||
-
-            String(book.category || "")
-                .toLowerCase()
-                .includes(search)
-
-            ||
-
-            String(book.status || "")
-                .toLowerCase()
-                .includes(search)
-        );
-
-
-    displayBooks(results);
-};
-
-
-/* =========================
-   STATISTICS
-   ========================= */
-
-function updateStatistics() {
-
-    const total =
-        allBooks.length;
-
-
-    const available =
-        allBooks.filter(
-            book => book.status === "Available"
-        ).length;
-
-
-    const issued =
-        allBooks.filter(
-            book => book.status === "Issued"
-        ).length;
-
-
-    const categorySet =
-        new Set(
-            allBooks.map(
-                book => book.category
-            )
-        );
-
-
-    document.getElementById("totalBooks")
-        .textContent = total;
-
-    document.getElementById("availableBooks")
-        .textContent = available;
-
-    document.getElementById("issuedBooks")
-        .textContent = issued;
-
-    document.getElementById("categories")
-        .textContent = categorySet.size;
-}
-
-
-/* =========================
-   CLEAR FORM
-   ========================= */
-
-window.clearForm = function() {
-
-    document.getElementById("bookId").value = "";
-
-    document.getElementById("bookTitle").value = "";
-
-    document.getElementById("author").value = "";
-
-    document.getElementById("category").value = "";
-
-    document.getElementById("bookStatus").value =
-        "Available";
-
-
-    const addButton =
-        document.querySelector(".add-btn");
-
-    addButton.textContent =
-        "Add Book";
-
-    addButton.onclick =
-        window.addBook;
-};
-
-
-/* =========================
-   MESSAGE
-   ========================= */
-
-function showMessage(text, color) {
-
-    const message =
-        document.getElementById("message");
-
-    message.textContent = text;
-
-    message.style.color = color;
-
-    setTimeout(() => {
-
-        message.textContent = "";
-
-    }, 4000);
-}
-
-
-/* =========================
-   HTML SAFETY
-   ========================= */
-
-function escapeHTML(value) {
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-
-/* =========================
-   START APPLICATION
-   ========================= */
-
-loadBooks();
-
-</script>
-
-</body>
-</html>
+        behavior
